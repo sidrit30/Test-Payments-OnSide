@@ -10,7 +10,12 @@
       const params = new URLSearchParams(window.location.search);
       const txn = params.get('_ptxn');
       if (txn) {
-        Paddle.Checkout.open({ transactionId: txn });
+        Paddle.Checkout.open({
+          transactionId: txn,
+          settings: {
+            successUrl: 'https://payment.onside.al/success'
+          }
+        });
       }
     });
   </script>
