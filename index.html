@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><title>Payment Successful</title></head>
-<body>
-  <p>Payment successful! Returning to the app...</p>
+<head>
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
   <script>
-    window.location.href = "onside://payment-success";
+    Paddle.Environment.set('sandbox');
+    Paddle.Initialize({ token: 'test_350cf667373d916b7aa38b7e0d2' });
+    
+    window.addEventListener('load', function() {
+      const params = new URLSearchParams(window.location.search);
+      const txn = params.get('_ptxn');
+      if (txn) {
+        Paddle.Checkout.open({ transactionId: txn });
+      }
+    });
   </script>
-</body>
+</head>
+<body></body>
 </html>
